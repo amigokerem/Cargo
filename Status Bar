@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .status-bar {
+            display: flex;
+            margin-top: 10px;
+        }
+        .status-segment {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #eee;
+            text-align: center;
+        }
+        .active {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cargo Tracking System</h2>
+        <form id="trackingForm">
+            <input type="text" id="trackingCode" name="trackingCode" placeholder="Enter Tracking Code" required>
+            <button type="button" onclick="checkStatus()">Track Cargo</button>
+        </form>
+        <div class="status" id="statusDisplay">Enter a tracking code to see the status.</div>
+        <div class="status-bar">
+            <div class="status-segment" id="in-output-unit">In Output Unit</div>
+            <div class="status-segment" id="transit">Transit</div>
+            <div class="status-segment" id="delivery-branch">Delivery Branch</div>
+            <div class="status-segment" id="out-for-delivery">Out for Delivery</div>
+            <div class="status-segment" id="delivered">Delivered</div>
+        </div>
+    </div>
+
+    <script>
+        function checkStatus() {
+            var trackingCode = document.getElementById('trackingCode').value;
+            var statuses = ["in-output-unit", "transit", "delivery-branch", "out-for-delivery", "delivered"];
+            var randomStatus = statuses[Math.floor(Math.random() * statuses.length)]; // Simulate status
+
+            // Update display text
+            document.getElementById('statusDisplay').innerText = "Status: " + randomStatus.charAt(0).toUpperCase() + randomStatus.slice(1).replace(/-/g, ' ');
+
+            // Reset all statuses
+            statuses.forEach(function(status) {
+                document.getElementById(status).classList.remove('active');
+            });
+
+            // Highlight the current status
+            document.getElementById(randomStatus).classList.add('active');
+        }
+    </script>
+</body>
+</html>
